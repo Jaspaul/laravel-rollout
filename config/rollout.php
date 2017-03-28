@@ -10,9 +10,9 @@ return [
     | This option controls the default location where we'll store the data
     | used by rollout.
     |
-    | Supported: "database", "null"
+    | Supported: "cache"
     |
     */
-    'driver' => env('ROLLOUT_DRIVER', 'database')
+    'driver' => env('ROLLOUT_DRIVER', 'cache')
 
 ];
