@@ -1,0 +1,29 @@
+{
+    "name": "jaspaul/laravel-rollout",
+    "description": "A package to integrate rollout into your Laravel project.",
+    "keywords": ["laravel", "rollout"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jaspaul Bola",
+            "email": "jaspaul.b@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jaspaul\\LaravelRollout\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
