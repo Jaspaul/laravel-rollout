@@ -2,15 +2,16 @@
 
 namespace Jaspaul\LaravelRollout\Drivers;
 
+use Illuminate\Cache\Repository;
 use Illuminate\Contracts\Cache\Store;
 use Opensoft\Rollout\Storage\StorageInterface;
 
 class Cache implements StorageInterface
 {
     /**
-     * An instance of a cache store that we can store our keys in.
+     * An instance of a cache repository that we can store our keys in.
      *
-     * @var \Illuminate\Contracts\Cache\Store;
+     * @var \Illuminate\Cache\Repository;
      */
     protected $store;
 
@@ -32,7 +33,7 @@ class Cache implements StorageInterface
      */
     public function __construct(Store $store, string $prefix = 'rollout')
     {
-        $this->store = $store;
+        $this->store = new Repository($store);
         $this->prefix = $prefix;
     }
 
@@ -50,7 +51,7 @@ class Cache implements StorageInterface
     public function get($key)
     {
         $key = sprintf('%s.%s', $this->prefix, $key);
-        return $this->store->get($key);
+        return $this->store->get($key, null);
     }
 
     /**
