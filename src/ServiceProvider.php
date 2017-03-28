@@ -2,6 +2,7 @@
 
 namespace Jaspaul\LaravelRollout;
 
+use Jaspaul\LaravelRollout\Drivers\Cache;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 class ServiceProvider extends IlluminateServiceProvider
@@ -13,10 +14,5 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function register()
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../config/rollout.php' => $this->app->make('path.config') . DIRECTORY_SEPARATOR . 'rollout.php'
-            ]);
-        }
     }
 }
