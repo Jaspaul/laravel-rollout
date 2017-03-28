@@ -12,7 +12,8 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.0",
-        "illuminate/support": "^5.3|^5.4"
+        "illuminate/support": "^5.3|^5.4",
+        "opensoft/rollout": "^2.2"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.9",
