@@ -59,7 +59,10 @@ class ListCommand extends Command
 
             $rows[] = [
                 'name' => $feature->getName(),
-                'status' => $feature->getDisplayStatus()
+                'status' => $feature->getDisplayStatus(),
+                'request-parameter' => $feature->getRequestParameter(),
+                'percentage' => $feature->getPercentage(),
+                'users' => $feature->getUsers()
             ];
         }
 
@@ -73,7 +76,7 @@ class ListCommand extends Command
      */
     public function handle()
     {
-        $headers = ['name', 'status'];
+        $headers = ['name', 'status', 'request-parameter', 'percentage', 'users'];
         $rows = $this->getRows();
 
         $this->table($headers, $rows);

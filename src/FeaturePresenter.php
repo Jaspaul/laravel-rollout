@@ -74,4 +74,37 @@ class FeaturePresenter
 
         return self::$statuses['disabled'];
     }
+
+    /**
+     * Returns the request parameter if one is available for enabling the
+     * feature.
+     *
+     * @return string
+     *         The request parameter if it's available, empty string otherwise.
+     */
+    public function getRequestParameter() : string
+    {
+        return $this->feature->getRequestParam() ?: '';
+    }
+
+    /**
+     * Returns the percentage the feature is enabled for.
+     *
+     * @return int
+     *         The whole percentage of users that have the feature enabled.
+     */
+    public function getPercentage() : int
+    {
+        return (int) $this->feature->getPercentage();
+    }
+
+    /**
+     * Returns a list of the users that have this feature enabled.
+     *
+     * @return string
+     */
+    public function getUsers() : string
+    {
+        return implode(', ', $this->feature->getUsers());
+    }
 }

@@ -19,7 +19,10 @@ class ListCommandTest extends TestCase
      */
     function it_returns_an_empty_table_if_there_are_no_stored_features()
     {
-        $expected = "+------+--------+\n| name | status |\n+------+--------+\n";
+        $expected = "+------+--------+-------------------+------------+-------+
+| name | status | request-parameter | percentage | users |
++------+--------+-------------------+------------+-------+
+";
 
         Artisan::call('rollout:list', []);
 

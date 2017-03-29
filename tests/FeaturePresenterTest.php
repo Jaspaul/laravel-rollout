@@ -89,4 +89,64 @@ class FeaturePresenterTest extends TestCase
 
         $this->assertEquals(FeaturePresenter::$statuses['whitelist'], $presenter->getDisplayStatus());
     }
+
+    /**
+     * @test
+     */
+    function get_request_parameter_returns_an_emtpy_string_if_a_request_parameter_is_not_set_on_the_feature()
+    {
+        $feature = new Feature('name');
+        $presenter = new FeaturePresenter($feature);
+
+        $this->assertEquals('', $presenter->getRequestParameter());
+    }
+
+    /**
+     * @test
+     */
+    function get_request_parameter_returns_the_request_parameter_when_one_is_set()
+    {
+        $feature = new Feature('name', '0|a|d|param');
+        $presenter = new FeaturePresenter($feature);
+
+        $this->assertEquals('param', $presenter->getRequestParameter());
+    }
+
+    /**
+     * @test
+     */
+    function get_percentage_returns_the_percentage_of_users_the_feature_is_enabled_for()
+    {
+        $feature = new Feature('name');
+        $presenter = new FeaturePresenter($feature);
+
+        $this->assertEquals(0, $presenter->getPercentage());
+
+        $feature = new Feature('name', '88|a|d|param');
+        $presenter = new FeaturePresenter($feature);
+
+        $this->assertEquals(88, $presenter->getPercentage());
+    }
+
+    /**
+     * @test
+     */
+    function get_users_returns_an_empty_string_by_default()
+    {
+        $feature = new Feature('name');
+        $presenter = new FeaturePresenter($feature);
+
+        $this->assertEmpty($presenter->getUsers());
+    }
+
+    /**
+     * @test
+     */
+    function get_users_returns_a_comma_seperated_string_of_users()
+    {
+        $feature = new Feature('name', '0|user_1,user_2,user_3||param');
+        $presenter = new FeaturePresenter($feature);
+
+        $this->assertEquals('user_1, user_2, user_3', $presenter->getUsers());
+    }
 }
