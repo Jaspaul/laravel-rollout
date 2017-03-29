@@ -13,7 +13,7 @@ class Cache implements StorageInterface
      *
      * @var \Illuminate\Cache\Repository;
      */
-    protected $store;
+    protected $repository;
 
     /**
      * The prefix for the cache key.
@@ -23,17 +23,17 @@ class Cache implements StorageInterface
     protected $prefix;
 
     /**
-     * Configures our cache driver with an instance of the cache store and a key
-     * prefix.
+     * Configures our cache driver with an instance of the cache repository and
+     * a key prefix.
      *
-     * @param \Illuminate\Contracts\Cache\Store $store
-     *        An instance of the cache store.
+     * @param \Illuminate\Cache\Repository $repository
+     *        An instance of the cache repository.
      * @param string $prefix
      *        A prefix for the cache keys.
      */
-    public function __construct(Store $store, string $prefix = 'rollout')
+    public function __construct(Repository $repository, string $prefix = 'rollout')
     {
-        $this->store = new Repository($store);
+        $this->repository = $repository;
         $this->prefix = $prefix;
     }
 
@@ -64,7 +64,7 @@ class Cache implements StorageInterface
      */
     public function get($key)
     {
-        return $this->store->get($this->prefixKey($key), null);
+        return $this->repository->get($this->prefixKey($key), null);
     }
 
     /**
@@ -80,7 +80,7 @@ class Cache implements StorageInterface
      */
     public function set($key, $value)
     {
-        $this->store->forever($this->prefixKey($key), $value);
+        $this->repository->forever($this->prefixKey($key), $value);
     }
 
     /**
@@ -94,6 +94,6 @@ class Cache implements StorageInterface
      */
     public function remove($key)
     {
-        $this->store->forget($this->prefixKey($key));
+        $this->repository->forget($this->prefixKey($key));
     }
 }

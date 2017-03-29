@@ -5,13 +5,14 @@ namespace Tests;
 use Mockery;
 use Tests\TestCase;
 use Illuminate\Cache\ArrayStore;
+use Illuminate\Cache\Repository;
 use Jaspaul\LaravelRollout\Drivers\Cache;
 
 class CacheTest extends TestCase
 {
     private $prefix = 'testing';
 
-    private $store;
+    private $repository;
     private $cache;
 
     /**
@@ -19,8 +20,8 @@ class CacheTest extends TestCase
      */
     function setup_cache()
     {
-        $this->store = new ArrayStore();
-        $this->cache = new Cache($this->store, $this->prefix);
+        $this->repository = new Repository(new ArrayStore());
+        $this->cache = new Cache($this->repository, $this->prefix);
     }
 
     /**

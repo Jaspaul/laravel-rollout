@@ -8,11 +8,11 @@ use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 class ServiceProvider extends IlluminateServiceProvider
 {
     /**
-     * Register the service provider.
+     * Boot the service provider.
      *
      * @return void
      */
-    public function register()
+    public function boot()
     {
     }
 }
