@@ -7,6 +7,7 @@ use Opensoft\Rollout\Rollout;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Cache\Repository;
 use Jaspaul\LaravelRollout\ServiceProvider;
+use Jaspaul\LaravelRollout\Console\ListFeatures;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 class ServiceProviderTest extends TestCase
@@ -45,5 +46,30 @@ class ServiceProviderTest extends TestCase
 
         $result = $this->container->make(Rollout::class);
         $this->assertInstanceOf(Rollout::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    function booting_registers_our_commands()
+    {
+        $this->container->singleton('cache.store', function ($app) {
+            return Mockery::mock(Repository::class);
+        });
+
+        $serviceProvider = new TestServiceProvider($this->container);
+        $serviceProvider->boot();
+
+        $this->assertEquals([ListFeatures::class], $serviceProvider->commands);
+    }
+}
+
+class TestServiceProvider extends ServiceProvider
+{
+    public $commands;
+
+    public function commands($commands)
+    {
+        $this->commands = $commands;
     }
 }

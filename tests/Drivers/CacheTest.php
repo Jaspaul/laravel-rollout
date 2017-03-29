@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Drivers;
 
 use Mockery;
 use Tests\TestCase;

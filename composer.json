@@ -13,6 +13,7 @@
     "require": {
         "php": ">=7.0",
         "illuminate/cache": "^5.3|^5.4",
+        "illuminate/console": "^5.3|^5.4",
         "illuminate/support": "^5.3|^5.4",
         "opensoft/rollout": "^2.2"
     },
