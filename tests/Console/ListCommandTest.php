@@ -6,44 +6,43 @@ use Tests\TestCase;
 use Opensoft\Rollout\Rollout;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Contracts\Console\Kernel;
 use Jaspaul\LaravelRollout\Drivers\Cache;
+use Jaspaul\LaravelRollout\FeaturePresenter;
 use Jaspaul\LaravelRollout\Console\ListCommand;
 
 class ListCommandTest extends TestCase
 {
-    private $command;
-    private $rollout;
-
     /**
-     * @before
+     * @test
      */
-    function setup_command()
+    function it_returns_an_empty_table_if_there_are_no_stored_features()
     {
-        $this->rollout = new Rollout(new Cache(new Repository(new ArrayStore())));
-        $this->command = new ListCommand($this->rollout);
+        $expected = "+------+--------+\n| name | status |\n+------+--------+\n";
+
+        Artisan::call('rollout:list', []);
+
+        $output = $this->app[Kernel::class]->output();
+
+        $this->assertSame($expected, $output);
     }
 
     /**
      * @test
      */
-    function get_rows_returns_an_empty_set_when_no_features_exist()
+    function it_returns_the_stored_features_in_the_table()
     {
-        $result = $this->command->getRows();
-        $this->assertEmpty($result);
-    }
+        $rollout = $this->app[Rollout::class];
 
-    /**
-     * @test
-     */
-    function get_rows_returns_the_features_that_were_set()
-    {
-        $this->rollout->get('test');
+        // Create our feature flag if it doesn't exist
+        $rollout->get('derp');
 
-        $result = $this->command->getRows();
+        Artisan::call('rollout:list', []);
 
-        $this->assertEquals(1, count($result));
-        $this->assertEquals(
-            [['name' => 'test', 'status' => 'Deactivated globally.']], $result
-        );
+        $output = $this->app[Kernel::class]->output();
+
+        $this->assertContains('derp', $output);
+        $this->assertContains(FeaturePresenter::$statuses['disabled'], $output);
     }
 }
