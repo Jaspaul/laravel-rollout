@@ -8,6 +8,7 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Cache\Repository;
 use Jaspaul\LaravelRollout\ServiceProvider;
 use Jaspaul\LaravelRollout\Console\ListCommand;
+use Jaspaul\LaravelRollout\Console\CreateCommand;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 class ServiceProviderTest extends TestCase
@@ -60,7 +61,10 @@ class ServiceProviderTest extends TestCase
         $serviceProvider = new TestServiceProvider($this->container);
         $serviceProvider->boot();
 
-        $this->assertEquals([ListCommand::class], $serviceProvider->commands);
+        $this->assertEquals(
+            [CreateCommand::class, ListCommand::class],
+            $serviceProvider->commands
+        );
     }
 }
 

@@ -5,6 +5,7 @@ namespace Jaspaul\LaravelRollout;
 use Opensoft\Rollout\Rollout;
 use Jaspaul\LaravelRollout\Drivers\Cache;
 use Jaspaul\LaravelRollout\Console\ListCommand;
+use Jaspaul\LaravelRollout\Console\CreateCommand;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 class ServiceProvider extends IlluminateServiceProvider
@@ -20,6 +21,9 @@ class ServiceProvider extends IlluminateServiceProvider
             return new Rollout(new Cache($app->make('cache.store')));
         });
 
-        $this->commands([ListCommand::class]);
+        $this->commands([
+            CreateCommand::class,
+            ListCommand::class
+        ]);
     }
 }

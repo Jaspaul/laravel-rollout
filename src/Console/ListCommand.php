@@ -37,6 +37,7 @@ class ListCommand extends Command
      */
     public function __construct(Rollout $rollout)
     {
+        parent::__construct();
         $this->rollout = $rollout;
     }
 
