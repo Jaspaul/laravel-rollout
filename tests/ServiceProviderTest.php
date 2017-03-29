@@ -7,7 +7,7 @@ use Opensoft\Rollout\Rollout;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Cache\Repository;
 use Jaspaul\LaravelRollout\ServiceProvider;
-use Jaspaul\LaravelRollout\Console\ListFeatures;
+use Jaspaul\LaravelRollout\Console\ListCommand;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 class ServiceProviderTest extends TestCase
@@ -60,7 +60,7 @@ class ServiceProviderTest extends TestCase
         $serviceProvider = new TestServiceProvider($this->container);
         $serviceProvider->boot();
 
-        $this->assertEquals([ListFeatures::class], $serviceProvider->commands);
+        $this->assertEquals([ListCommand::class], $serviceProvider->commands);
     }
 }
 

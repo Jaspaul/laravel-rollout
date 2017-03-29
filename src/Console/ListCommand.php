@@ -6,14 +6,14 @@ use Opensoft\Rollout\Rollout;
 use Illuminate\Console\Command;
 use Jaspaul\LaravelRollout\FeaturePresenter;
 
-class ListFeatures extends Command
+class ListCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'rollout:list-features';
+    protected $signature = 'rollout:list';
 
     /**
      * The console command description.

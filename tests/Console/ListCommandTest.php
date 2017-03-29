@@ -7,9 +7,9 @@ use Opensoft\Rollout\Rollout;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository;
 use Jaspaul\LaravelRollout\Drivers\Cache;
-use Jaspaul\LaravelRollout\Console\ListFeatures;
+use Jaspaul\LaravelRollout\Console\ListCommand;
 
-class ListFeaturesTest extends TestCase
+class ListCommandTest extends TestCase
 {
     private $command;
     private $rollout;
@@ -20,7 +20,7 @@ class ListFeaturesTest extends TestCase
     function setup_command()
     {
         $this->rollout = new Rollout(new Cache(new Repository(new ArrayStore())));
-        $this->command = new ListFeatures($this->rollout);
+        $this->command = new ListCommand($this->rollout);
     }
 
     /**
