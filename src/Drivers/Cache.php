@@ -38,6 +38,20 @@ class Cache implements StorageInterface
     }
 
     /**
+     * Prepends our key with the configured prefix.
+     *
+     * @param  string $key
+     *         The key to prepend with the prefix.
+     *
+     * @return string
+     *         The prefixed key.
+     */
+    private function prefixKey($key) : string
+    {
+        return sprintf('%s.%s', $this->prefix, $key);
+    }
+
+    /**
      * Get's the value corresponding to the provided key from the cache. Note
      * this function has the side effect of prepending the local prefix to the
      * key.
@@ -50,8 +64,7 @@ class Cache implements StorageInterface
      */
     public function get($key)
     {
-        $key = sprintf('%s.%s', $this->prefix, $key);
-        return $this->store->get($key, null);
+        return $this->store->get($this->prefixKey($key), null);
     }
 
     /**
@@ -67,8 +80,7 @@ class Cache implements StorageInterface
      */
     public function set($key, $value)
     {
-        $key = sprintf('%s.%s', $this->prefix, $key);
-        $this->store->forever($key, $value);
+        $this->store->forever($this->prefixKey($key), $value);
     }
 
     /**
@@ -82,7 +94,6 @@ class Cache implements StorageInterface
      */
     public function remove($key)
     {
-        $key = sprintf('%s.%s', $this->prefix, $key);
-        $this->store->forget($key);
+        $this->store->forget($this->prefixKey($key));
     }
 }
