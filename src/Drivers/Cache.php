@@ -2,8 +2,8 @@
 
 namespace Jaspaul\LaravelRollout\Drivers;
 
-use Illuminate\Cache\Repository;
 use Illuminate\Contracts\Cache\Store;
+use Illuminate\Contracts\Cache\Repository;
 use Opensoft\Rollout\Storage\StorageInterface;
 
 class Cache implements StorageInterface
@@ -11,7 +11,7 @@ class Cache implements StorageInterface
     /**
      * An instance of a cache repository that we can store our keys in.
      *
-     * @var \Illuminate\Cache\Repository;
+     * @var \Illuminate\Contracts\Cache\Repository
      */
     protected $repository;
 
@@ -26,7 +26,7 @@ class Cache implements StorageInterface
      * Configures our cache driver with an instance of the cache repository and
      * a key prefix.
      *
-     * @param \Illuminate\Cache\Repository $repository
+     * @param \Illuminate\Contracts\Cache\Repository $repository
      *        An instance of the cache repository.
      * @param string $prefix
      *        A prefix for the cache keys.
