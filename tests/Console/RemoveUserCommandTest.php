@@ -13,7 +13,7 @@ class RemoveUserCommandTest extends TestCase
     /**
      * @test
      */
-    function running_the_command_with_a_feature_will_create_the_corresponding_feature()
+    function running_the_command_with_a_feature_will_remove_the_corresponding_user()
     {
         $store = app()->make('cache.store')->getStore();
 
