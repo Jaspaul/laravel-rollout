@@ -4,13 +4,9 @@ namespace Tests\Drivers;
 
 use Tests\TestCase;
 use Opensoft\Rollout\Rollout;
-use Illuminate\Cache\ArrayStore;
-use Illuminate\Cache\Repository;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Contracts\Console\Kernel;
-use Jaspaul\LaravelRollout\Drivers\Cache;
 use Jaspaul\LaravelRollout\FeaturePresenter;
-use Jaspaul\LaravelRollout\Console\ListCommand;
 
 class ListCommandTest extends TestCase
 {

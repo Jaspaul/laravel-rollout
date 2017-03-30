@@ -2,19 +2,10 @@
 
 namespace Tests\Drivers;
 
-use Mockery;
 use Tests\TestCase;
 use Opensoft\Rollout\Rollout;
-use Illuminate\Cache\ArrayStore;
-use Illuminate\Cache\Repository;
 use Illuminate\Support\Facades\Artisan;
 use Jaspaul\LaravelRollout\Drivers\Cache;
-use Symfony\Component\Console\Input\Input;
-use Symfony\Component\Console\Output\Output;
-use Jaspaul\LaravelRollout\Console\CreateCommand;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Formatter\OutputFormatterInterface;
 
 class AddUserCommandTest extends TestCase
 {

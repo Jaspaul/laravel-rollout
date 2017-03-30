@@ -2,7 +2,6 @@
 
 namespace Tests\Drivers;
 
-use Mockery;
 use Tests\TestCase;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository;

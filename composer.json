@@ -19,6 +19,7 @@
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "^0.4.4",
+        "friendsofphp/php-cs-fixer": "^2.1",
         "illuminate/container": "^5.3|^5.4",
         "mockery/mockery": "^0.9.9",
         "orchestra/testbench": "^3.4",
