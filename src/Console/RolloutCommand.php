@@ -4,6 +4,9 @@ namespace Jaspaul\LaravelRollout\Console;
 
 use Opensoft\Rollout\Rollout;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
+use Jaspaul\LaravelRollout\FeaturePresenter;
+use Jaspaul\LaravelRollout\Helpers\FeatureTable;
 
 abstract class RolloutCommand extends Command
 {
@@ -25,6 +28,24 @@ abstract class RolloutCommand extends Command
     {
         parent::__construct();
         $this->rollout = $rollout;
+    }
+
+    /**
+     * Renders the feature as a table.
+     *
+     * @param  string $name
+     *         The name of the feature.
+     *
+     * @return void
+     */
+    public function renderFeatureAsTable(string $name)
+    {
+        $presenters = (new Collection([$name]))
+            ->map(function ($feature) {
+                return new FeaturePresenter($this->rollout->get($feature));
+            });
+
+        (new FeatureTable($presenters))->render($this);
     }
 
     /**
