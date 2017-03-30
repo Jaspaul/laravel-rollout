@@ -10,6 +10,7 @@ use Jaspaul\LaravelRollout\ServiceProvider;
 use Jaspaul\LaravelRollout\Console\ListCommand;
 use Jaspaul\LaravelRollout\Console\CreateCommand;
 use Jaspaul\LaravelRollout\Console\AddUserCommand;
+use Jaspaul\LaravelRollout\Console\RemoveUserCommand;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 class ServiceProviderTest extends TestCase
@@ -63,7 +64,12 @@ class ServiceProviderTest extends TestCase
         $serviceProvider->boot();
 
         $this->assertEquals(
-            [AddUserCommand::class, CreateCommand::class, ListCommand::class],
+            [
+                AddUserCommand::class,
+                CreateCommand::class,
+                ListCommand::class,
+                RemoveUserCommand::class
+            ],
             $serviceProvider->commands
         );
     }
