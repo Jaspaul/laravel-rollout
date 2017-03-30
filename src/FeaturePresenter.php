@@ -107,4 +107,20 @@ class FeaturePresenter
     {
         return implode(', ', $this->feature->getUsers());
     }
+
+    /**
+     * Returns an array representation of the feature presenter.
+     *
+     * @return array
+     */
+    public function toArray() : array
+    {
+        return [
+            'name' => $this->getName(),
+            'status' => $this->getDisplayStatus(),
+            'request-parameter' => $this->getRequestParameter(),
+            'percentage' => $this->getPercentage(),
+            'users' => $this->getUsers()
+        ];
+    }
 }

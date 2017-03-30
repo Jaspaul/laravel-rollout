@@ -35,14 +35,7 @@ class ListCommand extends RolloutCommand
         foreach ($features as $name)
         {
             $feature = new FeaturePresenter($this->rollout->get($name));
-
-            $rows[] = [
-                'name' => $feature->getName(),
-                'status' => $feature->getDisplayStatus(),
-                'request-parameter' => $feature->getRequestParameter(),
-                'percentage' => $feature->getPercentage(),
-                'users' => $feature->getUsers()
-            ];
+            $rows[] = $feature->toArray();
         }
 
         return $rows;

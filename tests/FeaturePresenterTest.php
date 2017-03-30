@@ -149,4 +149,23 @@ class FeaturePresenterTest extends TestCase
 
         $this->assertEquals('user_1, user_2, user_3', $presenter->getUsers());
     }
+
+    /**
+     * @test
+     */
+    function to_array_returns_an_array_representation_of_the_underlying_feature()
+    {
+        $expected = [
+            'name' => 'name',
+            'status' => FeaturePresenter::$statuses['request_param'],
+            'request-parameter' => 'param',
+            'percentage' => 0,
+            'users' => 'a'
+        ];
+
+        $feature = new Feature('name', '0|a|d|param');
+        $presenter = new FeaturePresenter($feature);
+
+        $this->assertEquals($expected, $presenter->toArray());
+    }
 }
