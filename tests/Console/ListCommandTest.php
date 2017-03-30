@@ -3,6 +3,7 @@
 namespace Tests\Drivers;
 
 use Tests\TestCase;
+use Opensoft\Rollout\Feature;
 use Opensoft\Rollout\Rollout;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Contracts\Console\Kernel;
@@ -15,16 +16,24 @@ class ListCommandTest extends TestCase
      */
     function it_returns_an_empty_table_if_there_are_no_stored_features()
     {
-        $expected = "+------+--------+-------------------+------------+-------+
-| name | status | request-parameter | percentage | users |
-+------+--------+-------------------+------------+-------+
-";
-
         Artisan::call('rollout:list', []);
 
         $output = $this->app[Kernel::class]->output();
+        $output = explode("\n", $output);
 
-        $this->assertSame($expected, $output);
+        $this->assertEquals(4, count($output));
+
+        // The first row is a header row +----+----+ ...
+        $this->assertTrue((bool) preg_match('/[+-]+/', $output[0]));
+
+        // The second row contains each of the keys for a feature presenter
+        $presenter = new FeaturePresenter(new Feature(''));
+        foreach (array_keys($presenter->toArray()) as $key) {
+            $this->assertContains($key, $output[1]);
+        }
+
+        // The first row is a seperator row +----+----+ ...
+        $this->assertTrue((bool) preg_match('/[+-]+/', $output[2]));
     }
 
     /**
