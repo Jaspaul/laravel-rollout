@@ -2,6 +2,7 @@
 
 namespace Jaspaul\LaravelRollout\Console;
 
+use Illuminate\Support\Collection;
 use Jaspaul\LaravelRollout\FeaturePresenter;
 
 class ListCommand extends RolloutCommand
@@ -23,22 +24,17 @@ class ListCommand extends RolloutCommand
     /**
      * Returns the feature rows.
      *
-     * @return array
+     * @return \Illuminate\Support\Collection
      *         A list of features.
      */
-    protected function getRows() : array
+    protected function getRows() : Collection
     {
-        $rows = [];
-
-        $features = $this->rollout->features();
-
-        foreach ($features as $name)
-        {
-            $feature = new FeaturePresenter($this->rollout->get($name));
-            $rows[] = $feature->toArray();
-        }
-
-        return $rows;
+        return (new Collection($this->rollout->features()))
+            ->map(function ($feature) {
+                return new FeaturePresenter($this->rollout->get($feature));
+            })->map(function (FeaturePresenter $feature) {
+                return $feature->toArray();
+            });
     }
 
     /**
