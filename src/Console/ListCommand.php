@@ -2,11 +2,9 @@
 
 namespace Jaspaul\LaravelRollout\Console;
 
-use Opensoft\Rollout\Rollout;
-use Illuminate\Console\Command;
 use Jaspaul\LaravelRollout\FeaturePresenter;
 
-class ListCommand extends Command
+class ListCommand extends RolloutCommand
 {
     /**
      * The name and signature of the console command.
@@ -23,31 +21,12 @@ class ListCommand extends Command
     protected $description = 'Returns a list of all the features that have been created.';
 
     /**
-     * The rollout service.
-     *
-     * @var \Opensoft\Rollout\Rollout
-     */
-    protected $rollout;
-
-    /**
-     * Initialize our list features command with an instance of the rollout service.
-     *
-     * @param \Opensoft\Rollout\Rollout $rollout
-     *        The rollout service.
-     */
-    public function __construct(Rollout $rollout)
-    {
-        parent::__construct();
-        $this->rollout = $rollout;
-    }
-
-    /**
      * Returns the feature rows.
      *
      * @return array
      *         A list of features.
      */
-    public function getRows() : array
+    protected function getRows() : array
     {
         $rows = [];
 
