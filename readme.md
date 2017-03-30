@@ -51,11 +51,11 @@ class User implements Contract
 
 ## Commands
 
-### List
+### Add User
 
-`php artisan rollout:list`
+`php artisan rollout:add-user {feature} {user}`
 
-![](https://cloud.githubusercontent.com/assets/2836589/24476459/4773446c-14a1-11e7-8ea5-132fe747e0ac.png)
+Swap `{feature}` with the name of the feature, and `{user}` with a unique identifier for the user in your system.
 
 ### Create
 
@@ -63,8 +63,32 @@ class User implements Contract
 
 Swap `{feature}` with the name of the feature you'd like to create a feature flag for.
 
-### Add User
+### Deactivate
 
-`php artisan rollout:add-user {feature} {user}`
+`php artisan rollout:deactivate {feature}`
 
-Swap `{feature}` with the name of the feature, and `{user}` with a unique identifier for the user in your system.
+Swap `{feature}` with the name of the feature you'd like to deactivate globally. Note this will also reset the user whitelist.
+
+### Delete
+
+`php artisan rollout:delete {feature}`
+
+Swap `{feature}` with the name of the feature you'd like to permanently delete from rollout.
+
+### Everyone
+
+`php artisan rollout:everyone {feature}`
+
+Swap `{feature}` with the name of the feature you'd like to rollout to 100% of your user base.
+
+### List
+
+`php artisan rollout:list`
+
+![](https://cloud.githubusercontent.com/assets/2836589/24476459/4773446c-14a1-11e7-8ea5-132fe747e0ac.png)
+
+### Remove User
+
+`php artisan rollout:remove-user {feature} {user}`
+
+Swap `{feature}` with the name of the feature, and `{user}` with a unique identifier for the user in your system to remove the feature from.
