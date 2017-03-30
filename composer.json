@@ -18,6 +18,7 @@
         "opensoft/rollout": "^2.2"
     },
     "require-dev": {
+        "codeclimate/php-test-reporter": "^0.4.4",
         "illuminate/container": "^5.3|^5.4",
         "mockery/mockery": "^0.9.9",
         "orchestra/testbench": "^3.4",
