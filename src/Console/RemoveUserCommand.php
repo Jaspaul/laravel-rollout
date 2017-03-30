@@ -32,5 +32,6 @@ class RemoveUserCommand extends RolloutCommand
         $userIdentifier = $this->argument('user');
 
         $this->rollout->deactivateUser($name, new User($userIdentifier));
+        $this->renderFeatureAsTable($name);
     }
 }

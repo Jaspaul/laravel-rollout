@@ -32,5 +32,7 @@ class AddUserCommand extends RolloutCommand
         $userIdentifier = $this->argument('user');
 
         $this->rollout->activateUser($name, new User($userIdentifier));
+
+        $this->renderFeatureAsTable($name);
     }
 }

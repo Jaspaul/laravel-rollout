@@ -26,6 +26,6 @@ class CreateCommand extends RolloutCommand
     public function handle()
     {
         $name = $this->argument('feature');
-        $this->rollout->get($name);
+        $this->renderFeatureAsTable($name);
     }
 }

@@ -29,5 +29,6 @@ class EveryoneCommand extends RolloutCommand
     {
         $name = $this->argument('feature');
         $this->rollout->activatePercentage($name, 100);
+        $this->renderFeatureAsTable($name);
     }
 }

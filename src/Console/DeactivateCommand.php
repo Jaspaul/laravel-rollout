@@ -29,5 +29,6 @@ class DeactivateCommand extends RolloutCommand
     {
         $name = $this->argument('feature');
         $this->rollout->deactivate($name);
+        $this->renderFeatureAsTable($name);
     }
 }
