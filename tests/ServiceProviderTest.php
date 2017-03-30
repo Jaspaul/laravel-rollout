@@ -12,6 +12,7 @@ use Jaspaul\LaravelRollout\Console\CreateCommand;
 use Jaspaul\LaravelRollout\Console\DeleteCommand;
 use Jaspaul\LaravelRollout\Console\AddUserCommand;
 use Jaspaul\LaravelRollout\Console\EveryoneCommand;
+use Jaspaul\LaravelRollout\Console\DeactivateCommand;
 use Jaspaul\LaravelRollout\Console\RemoveUserCommand;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
@@ -69,6 +70,7 @@ class ServiceProviderTest extends TestCase
             [
                 AddUserCommand::class,
                 CreateCommand::class,
+                DeactivateCommand::class,
                 DeleteCommand::class,
                 EveryoneCommand::class,
                 ListCommand::class,
