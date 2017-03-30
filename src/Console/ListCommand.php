@@ -34,8 +34,6 @@ class ListCommand extends RolloutCommand
                 return new FeaturePresenter($this->rollout->get($feature));
             });
 
-        $table = new FeatureTable($presenters);
-
-        $this->table($table->getHeaders()->toArray(), $table->getRows());
+        (new FeatureTable($presenters))->render($this);
     }
 }

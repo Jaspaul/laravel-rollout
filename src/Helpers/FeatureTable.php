@@ -3,6 +3,7 @@
 namespace Jaspaul\LaravelRollout\Helpers;
 
 use Opensoft\Rollout\Feature;
+use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Jaspaul\LaravelRollout\FeaturePresenter;
 
@@ -49,5 +50,18 @@ class FeatureTable
         return $this->presenters->map(function (FeaturePresenter $feature) {
             return $feature->toArray();
         });
+    }
+
+    /**
+     * Renders itself as a table through the provided command.
+     *
+     * @param  \Illuminate\Console\Command $command
+     *         The command to render the table into.
+     *
+     * @return void
+     */
+    public function render(Command $command)
+    {
+        $command->table($this->getHeaders()->toArray(), $this->getRows()->toArray());
     }
 }

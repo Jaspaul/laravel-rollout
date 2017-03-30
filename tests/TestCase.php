@@ -28,4 +28,12 @@ abstract class TestCase extends Base
             ServiceProvider::class,
         ];
     }
+
+    /**
+     * @after
+     */
+    protected function close_mockery()
+    {
+        Mockery::close();
+    }
 }
