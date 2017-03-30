@@ -27,5 +27,6 @@ class DeleteCommand extends RolloutCommand
     {
         $name = $this->argument('feature');
         $this->rollout->remove($name);
+        $this->line(sprintf("The '%s' flag was removed.", $name));
     }
 }
