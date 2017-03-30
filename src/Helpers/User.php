@@ -11,17 +11,17 @@ class User implements Contract
      *
      * @var string
      */
-    protected $id;
+    protected $userIdentifier;
 
     /**
      * Constructs our user helper with an id.
      *
-     * @param string $id
+     * @param string $userIdentifier
      *        The id of the user.
      */
-    public function __construct(string $id)
+    public function __construct(string $userIdentifier)
     {
-        $this->id = $id;
+        $this->userIdentifier = $userIdentifier;
     }
 
     /**
@@ -32,6 +32,6 @@ class User implements Contract
      */
     public function getRolloutIdentifier()
     {
-        return $this->id;
+        return $this->userIdentifier;
     }
 }

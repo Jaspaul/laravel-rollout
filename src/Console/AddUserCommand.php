@@ -28,8 +28,8 @@ class AddUserCommand extends RolloutCommand
     public function handle()
     {
         $name = $this->argument('feature');
-        $id = $this->argument('user');
+        $userIdentifier = $this->argument('user');
 
-        $feature = $this->rollout->activateUser($name, new User($id));
+        $this->rollout->activateUser($name, new User($userIdentifier));
     }
 }
