@@ -21,7 +21,8 @@ class AddUserCommand extends RolloutCommand
     protected $description = 'Adds the provided user id to the feature.';
 
     /**
-     * Creates the provided feature.
+     * Adds the provided user to the requested feature. Note this will create
+     * the feature as a side effect.
      *
      * @return void
      */
