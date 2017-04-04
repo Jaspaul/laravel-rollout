@@ -87,6 +87,12 @@ Swap `{feature}` with the name of the feature you'd like to rollout to 100% of y
 
 ![](https://cloud.githubusercontent.com/assets/2836589/24476459/4773446c-14a1-11e7-8ea5-132fe747e0ac.png)
 
+### Percentage
+
+`php artisan rollout:percentage {feature} {percentage}`
+
+Swap `{feature}` with the name of the feature you'd like to rollout, and `{percentage}` with the percentage of users to rollout the feature to.
+
 ### Remove User
 
 `php artisan rollout:remove-user {feature} {user}`
