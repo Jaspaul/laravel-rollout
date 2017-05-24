@@ -34,9 +34,11 @@ php artisan vendor:publish --provider 'Jaspaul\LaravelRollout\ServiceProvider'
 
 #### Setting up a Cache
 
-Be sure to [enable the cache](https://laravel.com/docs/5.4/cache) for your Laravel application. This package uses the cache to store the rollout settings.
+If you intend to use cache to store the settings for rollout, be sure to [enable the cache](https://laravel.com/docs/5.4/cache) for your Laravel application. Note if you are using the cache, a cache clear during deployment will cause your rollout settings to be purged. If you require persistence for these settings use the option below.
 
 #### Setting up Persistent Storage
+
+This will allow you to have rollout settings be persisted even if you clear the application cache for every deployment.
 
 ##### Running the Migrations
 
