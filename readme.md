@@ -12,10 +12,6 @@ A Laravel package for [opensoft/rollout](https://github.com/opensoft/rollout)
 composer require jaspaul/laravel-rollout
 ```
 
-### Setting up a Cache
-
-Be sure to [enable the cache](https://laravel.com/docs/5.4/cache) for your Laravel application. This package uses the cache to store the rollout settings.
-
 ### Configuring the Service Provider
 
 Open config/app.php and register the required service provider above your application providers.
@@ -26,6 +22,35 @@ Open config/app.php and register the required service provider above your applic
     Jaspaul\LaravelRollout\ServiceProvider::class
     ...
 ]
+```
+
+### Setting up Storage
+
+#### Publish the Configuration
+
+```sh
+php artisan vendor:publish --provider 'Jaspaul\LaravelRollout\ServiceProvider'
+```
+
+#### Setting up a Cache
+
+If you intend to use cache to store the settings for rollout, be sure to [enable the cache](https://laravel.com/docs/5.4/cache) for your Laravel application. Note if you are using the cache, a cache clear during deployment will cause your rollout settings to be purged. If you require persistence for these settings use the option below.
+
+#### Setting up Persistent Storage
+
+This will allow you to have rollout settings be persisted even if you clear the application cache for every deployment.
+
+##### Running the Migrations
+
+```sh
+php artisan migrate
+```
+
+##### Configuring your Environment
+
+```
+ROLLOUT_STORAGE=database
+ROLLOUT_TABLE=rollout
 ```
 
 ### Implementing Interfaces
