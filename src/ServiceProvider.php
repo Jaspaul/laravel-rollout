@@ -3,12 +3,17 @@
 namespace Jaspaul\LaravelRollout;
 
 use Opensoft\Rollout\Rollout;
+use Illuminate\Cache\Repository;
+use Illuminate\Cache\DatabaseStore;
 use Jaspaul\LaravelRollout\Drivers\Cache;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Contracts\Encryption\Encrypter;
 use Jaspaul\LaravelRollout\Console\ListCommand;
 use Jaspaul\LaravelRollout\Console\CreateCommand;
 use Jaspaul\LaravelRollout\Console\DeleteCommand;
 use Jaspaul\LaravelRollout\Console\AddUserCommand;
 use Jaspaul\LaravelRollout\Console\EveryoneCommand;
+use Illuminate\Contracts\Config\Repository as Config;
 use Jaspaul\LaravelRollout\Console\DeactivateCommand;
 use Jaspaul\LaravelRollout\Console\PercentageCommand;
 use Jaspaul\LaravelRollout\Console\RemoveUserCommand;
@@ -23,8 +28,25 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function boot()
     {
+        $this->publishConfigurations();
+
+        $this->loadMigrations();
+
         $this->app->singleton(Rollout::class, function ($app) {
-            return new Rollout(new Cache($app->make('cache.store')));
+            $config = $app->make(Config::class);
+
+            if ($config->get('laravel-rollout.storage') === 'database') {
+                $connection = $app->make(ConnectionInterface::class);
+                $encrypter = $app->make(Encrypter::class);
+                $table = $config->get('laravel-rollout.table');
+
+                $repository = new Repository(new DatabaseStore($connection, $encrypter, $table));
+                $driver = new Cache($repository);
+            } else {
+                $driver = new Cache($app->make('cache.store'));
+            }
+
+            return new Rollout($driver);
         });
 
         $this->commands([
@@ -37,5 +59,27 @@ class ServiceProvider extends IlluminateServiceProvider
             PercentageCommand::class,
             RemoveUserCommand::class
         ]);
+    }
+
+    /**
+     * Adds our configuration file to the publishes array.
+     *
+     * @return void
+     */
+    protected function publishConfigurations()
+    {
+        $this->publishes([
+            __DIR__.'/../resources/config/laravel-rollout.php' => config_path('laravel-rollout.php'),
+        ]);
+    }
+
+    /**
+     * Loads our migrations.
+     *
+     * @return void
+     */
+    protected function loadMigrations()
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../resources/migrations');
     }
 }

@@ -13,7 +13,9 @@
     "require": {
         "php": ">=7.0",
         "illuminate/cache": "^5.3",
+        "illuminate/config": "^5.3",
         "illuminate/console": "^5.3",
+        "illuminate/database": "^5.3",
         "illuminate/support": "^5.3",
         "opensoft/rollout": "^2.2"
     },
