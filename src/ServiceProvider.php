@@ -40,7 +40,7 @@ class ServiceProvider extends IlluminateServiceProvider
                 $encrypter = $app->make(Encrypter::class);
                 $table = $config->get('laravel-rollout.table');
 
-                $repository = new Repository(new DatabaseStore($connection, $encrypter, $table));
+                $repository = new Repository(new DatabaseStore($connection, $table));
                 $driver = new Cache($repository);
             } else {
                 $driver = new Cache($app->make('cache.store'));
