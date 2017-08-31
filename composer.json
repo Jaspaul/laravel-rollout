@@ -1,5 +1,5 @@
 {
-    "name": "jaspaul/laravel-rollout",
+    "name": "cryma/laravel-rollout",
     "description": "A package to integrate rollout into your Laravel project.",
     "keywords": ["laravel", "rollout"],
     "license": "MIT",
@@ -7,6 +7,10 @@
         {
             "name": "Jaspaul Bola",
             "email": "jaspaul.b@gmail.com"
+        },
+        {
+            "name": "Fabian Vowie",
+            "email": "crymaprivat@gmail.com"
         }
     ],
     "minimum-stability": "stable",
