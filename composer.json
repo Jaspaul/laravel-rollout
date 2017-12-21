@@ -17,7 +17,8 @@
         "illuminate/console": "^5.4",
         "illuminate/database": "^5.4",
         "illuminate/support": "^5.4",
-        "opensoft/rollout": "^2.2"
+        "opensoft/rollout": "^2.2",
+        "roave/better-reflection": "^2.0"
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "^0.4.4",
