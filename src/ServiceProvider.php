@@ -7,6 +7,7 @@ use Illuminate\Cache\Repository;
 use Illuminate\Cache\DatabaseStore;
 use Jaspaul\LaravelRollout\Drivers\Cache;
 use Illuminate\Database\ConnectionInterface;
+use Roave\BetterReflection\BetterReflection;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Jaspaul\LaravelRollout\Console\ListCommand;
 use Jaspaul\LaravelRollout\Console\CreateCommand;
@@ -22,6 +23,29 @@ use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 class ServiceProvider extends IlluminateServiceProvider
 {
     /**
+     * Returns the correct database store based on the required parameters. This
+     * was added since Laravel 5.5 dropped the encrypter as a constructor
+     * requirement.
+     *
+     * @param string $table
+     *
+     * @return \Illuminate\Cache\DatabaseStore
+     */
+    protected function getDatabaseStore(string $table) : DatabaseStore
+    {
+        $class = (new BetterReflection())->classReflector()->reflect(DatabaseStore::class);
+        $constructor = $class->getConstructor();
+
+        $connection = $app->make(ConnectionInterface::class);
+
+        if (!is_null($constructor->getParameter('encrypter'))) {
+            $encrypter = $app->make(Encrypter::class);
+            return new DatabaseStore($connection, $encrypter, $table);
+        }
+
+        return new DatabaseStore($connection, $table);
+    }
+    /**
      * Boot the service provider.
      *
      * @return void
@@ -36,11 +60,8 @@ class ServiceProvider extends IlluminateServiceProvider
             $config = $app->make(Config::class);
 
             if ($config->get('laravel-rollout.storage') === 'database') {
-                $connection = $app->make(ConnectionInterface::class);
-                $encrypter = $app->make(Encrypter::class);
                 $table = $config->get('laravel-rollout.table');
-
-                $repository = new Repository(new DatabaseStore($connection, $encrypter, $table));
+                $repository = new Repository($this->getDatabaseStore($table));
                 $driver = new Cache($repository);
             } else {
                 $driver = new Cache($app->make('cache.store'));
