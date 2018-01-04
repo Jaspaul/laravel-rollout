@@ -12,17 +12,17 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.0",
-        "illuminate/cache": "^5.3",
-        "illuminate/config": "^5.3",
-        "illuminate/console": "^5.3",
-        "illuminate/database": "^5.3",
-        "illuminate/support": "^5.3",
+        "illuminate/cache": "^5.4",
+        "illuminate/config": "^5.4",
+        "illuminate/console": "^5.4",
+        "illuminate/database": "^5.4",
+        "illuminate/support": "^5.4",
         "opensoft/rollout": "^2.2"
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "^0.4.4",
         "friendsofphp/php-cs-fixer": "^2.1",
-        "illuminate/container": "^5.3|^5.4",
+        "illuminate/container": "^5.4",
         "mockery/mockery": "^0.9.9",
         "orchestra/testbench": "^3.4",
         "phpunit/phpunit": "^6.0",
