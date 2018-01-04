@@ -38,7 +38,7 @@ class ServiceProvider extends IlluminateServiceProvider
             if ($config->get('laravel-rollout.storage') === 'database') {
                 $table = $config->get('laravel-rollout.table');
 
-                $repository = new Repository($app->make(DatabaseStore::class, ['table' => $table]));
+                $repository = new Repository($app->makeWith(DatabaseStore::class, ['table' => $table]));
                 $driver = new Cache($repository);
             } else {
                 $driver = new Cache($app->make('cache.store'));
