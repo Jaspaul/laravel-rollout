@@ -14,7 +14,9 @@ composer require jaspaul/laravel-rollout
 
 ### Configuring the Service Provider
 
-Open config/app.php and register the required service provider above your application providers.
+On Laravel 5.5, the package discovery will configure the service provider automatically.
+
+On Laravel 5.4, open config/app.php and register the required service provider above your application providers.
 
 ```php
 'providers' => [
