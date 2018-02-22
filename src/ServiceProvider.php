@@ -60,6 +60,18 @@ class ServiceProvider extends IlluminateServiceProvider
     }
 
     /**
+     * Register bindings in the container.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->mergeConfigFrom(
+            __DIR__.'/../resources/config/laravel-rollout.php', 'laravel-rollout'
+        );
+    }
+
+    /**
      * Adds our configuration file to the publishes array.
      *
      * @return void
@@ -69,8 +81,6 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->publishes([
             __DIR__.'/../resources/config/laravel-rollout.php' => config_path('laravel-rollout.php'),
         ]);
-
-        $this->mergeConfigFrom(__DIR__.'/../resources/config/laravel-rollout.php', 'laravel-rollout');
     }
 
     /**
