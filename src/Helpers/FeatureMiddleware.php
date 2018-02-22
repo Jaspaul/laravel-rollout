@@ -46,7 +46,7 @@ class FeatureMiddleware
 
         foreach ($features as $feature) {
             if ($request->user()->featureNotEnabled($feature)) {
-                throw new AuthorizationException('Unauthenticated.');
+                throw new AuthorizationException('Unauthorized.');
             }
         }
     }
