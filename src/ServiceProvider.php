@@ -69,6 +69,8 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->publishes([
             __DIR__.'/../resources/config/laravel-rollout.php' => config_path('laravel-rollout.php'),
         ]);
+
+        $this->mergeConfigFrom(__DIR__.'/../resources/config/laravel-rollout.php', 'laravel-rollout');
     }
 
     /**
