@@ -6,6 +6,8 @@ use Jaspaul\LaravelRollout\Contracts\User as Contract;
 
 class User implements Contract
 {
+    use InteractsWithRolloutTrait;
+
     /**
      * The id of the user.
      *
