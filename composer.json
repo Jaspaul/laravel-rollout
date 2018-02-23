@@ -30,6 +30,9 @@
         "squizlabs/php_codesniffer": "^2.8"
     },
     "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
         "psr-4": {
             "Jaspaul\\LaravelRollout\\": "src/"
         }
