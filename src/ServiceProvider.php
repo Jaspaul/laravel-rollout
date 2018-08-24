@@ -12,11 +12,13 @@ use Jaspaul\LaravelRollout\Console\ListCommand;
 use Jaspaul\LaravelRollout\Console\CreateCommand;
 use Jaspaul\LaravelRollout\Console\DeleteCommand;
 use Jaspaul\LaravelRollout\Console\AddUserCommand;
+use Jaspaul\LaravelRollout\Console\AddGroupCommand;
 use Jaspaul\LaravelRollout\Console\EveryoneCommand;
 use Illuminate\Contracts\Config\Repository as Config;
 use Jaspaul\LaravelRollout\Console\DeactivateCommand;
 use Jaspaul\LaravelRollout\Console\PercentageCommand;
 use Jaspaul\LaravelRollout\Console\RemoveUserCommand;
+use Jaspaul\LaravelRollout\Console\RemoveGroupCommand;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 class ServiceProvider extends IlluminateServiceProvider
@@ -44,10 +46,13 @@ class ServiceProvider extends IlluminateServiceProvider
                 $driver = new Cache($app->make('cache.store'));
             }
 
-            return new Rollout($driver);
+            $this->loadGroups($rollout = new Rollout($driver), $config->get('laravel-rollout.groups'));
+
+            return $rollout;
         });
 
         $this->commands([
+            AddGroupCommand::class,
             AddUserCommand::class,
             CreateCommand::class,
             DeactivateCommand::class,
@@ -55,6 +60,7 @@ class ServiceProvider extends IlluminateServiceProvider
             EveryoneCommand::class,
             ListCommand::class,
             PercentageCommand::class,
+            RemoveGroupCommand::class,
             RemoveUserCommand::class
         ]);
     }
@@ -67,7 +73,8 @@ class ServiceProvider extends IlluminateServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../resources/config/laravel-rollout.php', 'laravel-rollout'
+            __DIR__.'/../resources/config/laravel-rollout.php',
+            'laravel-rollout'
         );
     }
 
@@ -91,5 +98,20 @@ class ServiceProvider extends IlluminateServiceProvider
     protected function loadMigrations()
     {
         $this->loadMigrationsFrom(__DIR__.'/../resources/migrations');
+    }
+
+    /**
+     * Loads our groups
+     *
+     * @return void
+     */
+    protected function loadGroups(Rollout $rollout, array $groups)
+    {
+        foreach ($groups as $group) {
+            $instance = resolve($group);
+            $rollout->defineGroup($instance->getName(), function ($user = null) use ($instance) {
+                return $instance->hasMember($user);
+            });
+        }
     }
 }

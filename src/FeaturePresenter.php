@@ -109,6 +109,16 @@ class FeaturePresenter
     }
 
     /**
+     * Returns a list of the groups that have this feature enabled.
+     *
+     * @return string
+     */
+    public function getGroups() : string
+    {
+        return implode(', ', $this->feature->getGroups());
+    }
+
+    /**
      * Returns an array representation of the feature presenter.
      *
      * @return array
@@ -120,7 +130,8 @@ class FeaturePresenter
             'status' => $this->getDisplayStatus(),
             'request-parameter' => $this->getRequestParameter(),
             'percentage' => $this->getPercentage(),
-            'users' => $this->getUsers()
+            'users' => $this->getUsers(),
+            'groups' => $this->getGroups(),
         ];
     }
 }
