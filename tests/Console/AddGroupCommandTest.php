@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Artisan;
 use Jaspaul\LaravelRollout\Helpers\User;
 use Jaspaul\LaravelRollout\Drivers\Cache;
 
-class AddGropuCommandTest extends TestCase
+class AddGroupCommandTest extends TestCase
 {
     /**
      * @test
