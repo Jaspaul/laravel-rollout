@@ -108,7 +108,7 @@ class ServiceProvider extends IlluminateServiceProvider
     protected function loadGroups(Rollout $rollout, array $groups)
     {
         foreach ($groups as $group) {
-            $instance = new $group();
+            $instance = resolve($group);
             $rollout->defineGroup($instance->getName(), function ($user = null) use ($instance) {
                 return $instance->hasMember($user);
             });
