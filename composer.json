@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.2",
         "illuminate/cache": "^6.0",
         "illuminate/config": "^6.0",
         "illuminate/console": "^6.0",
