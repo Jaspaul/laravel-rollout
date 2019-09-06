@@ -42,6 +42,6 @@ class DeleteCommandTest extends TestCase
 
         $output = $this->app[Kernel::class]->output();
 
-        $this->assertContains('derp', $output);
+        $this->assertStringContainsString('derp', $output);
     }
 }

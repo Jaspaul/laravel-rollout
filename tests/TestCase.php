@@ -14,7 +14,6 @@ abstract class TestCase extends Base
     protected function setUpMockery()
     {
         Mockery::getConfiguration()->allowMockingNonExistentMethods(false);
-        Mockery::getConfiguration()->allowMockingMethodsUnnecessarily(false);
     }
 
     /**
