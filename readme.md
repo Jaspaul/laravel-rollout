@@ -14,17 +14,7 @@ composer require jaspaul/laravel-rollout
 
 ### Configuring the Service Provider
 
-On Laravel 5.5, the package discovery will configure the service provider automatically.
-
-On Laravel 5.4, open config/app.php and register the required service provider above your application providers.
-
-```php
-'providers' => [
-    ...
-    Jaspaul\LaravelRollout\ServiceProvider::class
-    ...
-]
-```
+Package discovery will configure the service provider automatically.
 
 ### Setting up Storage
 
@@ -36,7 +26,7 @@ php artisan vendor:publish --provider 'Jaspaul\LaravelRollout\ServiceProvider'
 
 #### Setting up a Cache
 
-If you intend to use cache to store the settings for rollout, be sure to [enable the cache](https://laravel.com/docs/5.4/cache) for your Laravel application. Note if you are using the cache, a cache clear during deployment will cause your rollout settings to be purged. If you require persistence for these settings use the option below.
+If you intend to use cache to store the settings for rollout, be sure to [enable the cache](https://laravel.com/docs/6.x/cache) for your Laravel application. Note if you are using the cache, a cache clear during deployment will cause your rollout settings to be purged. If you require persistence for these settings use the option below.
 
 #### Setting up Persistent Storage
 
