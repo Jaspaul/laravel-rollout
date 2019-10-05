@@ -29,7 +29,7 @@ class ListCommandTest extends TestCase
         // The second row contains each of the keys for a feature presenter
         $presenter = new FeaturePresenter(new Feature(''));
         foreach (array_keys($presenter->toArray()) as $key) {
-            $this->assertContains($key, $output[1]);
+            $this->assertStringContainsString($key, $output[1]);
         }
 
         // The first row is a seperator row +----+----+ ...
@@ -50,7 +50,7 @@ class ListCommandTest extends TestCase
 
         $output = $this->app[Kernel::class]->output();
 
-        $this->assertContains('derp', $output);
-        $this->assertContains(FeaturePresenter::$statuses['disabled'], $output);
+        $this->assertStringContainsString('derp', $output);
+        $this->assertStringContainsString(FeaturePresenter::$statuses['disabled'], $output);
     }
 }
