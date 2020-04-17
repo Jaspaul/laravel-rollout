@@ -3,7 +3,7 @@ language: php
 matrix:
   include:
     - php: 7.2
-      env: ILLUMINATE_VERSION=6.0.*
+      env: ILLUMINATE_VERSION=7.0.*
 
 before_install:
   - composer require "illuminate/cache:${ILLUMINATE_VERSION}" --no-update
