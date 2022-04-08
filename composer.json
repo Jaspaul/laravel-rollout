@@ -12,16 +12,16 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.2.5",
-        "illuminate/cache": "^7|^8",
-        "illuminate/config": "^7|^8",
-        "illuminate/console": "^7|^8",
-        "illuminate/database": "^7|^8",
-        "illuminate/support": "^7|^8",
+        "illuminate/cache": "^7|^8|^9",
+        "illuminate/config": "^7|^8|^9",
+        "illuminate/console": "^7|^8|^9",
+        "illuminate/database": "^7|^8|^9",
+        "illuminate/support": "^7|^8|^9",
         "opensoft/rollout": "2.2.*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.1",
-        "illuminate/container": "^7|^8",
+        "illuminate/container": "^7|^8|^9",
         "mockery/mockery": "^1.2",
         "orchestra/testbench": "^5.0",
         "php-coveralls/php-coveralls": "^2.1",
